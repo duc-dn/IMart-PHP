@@ -5,12 +5,19 @@ isset($_POST['phone']) ? $phone = $_POST['phone']: $phone ="";
 isset($_POST['address']) ? $address = $_POST['address']: $address ="";
 isset($_POST['note']) ? $note = $_POST['note']: $note ="";
 
+if ($_POST['payment-method'] == "payment-home") $pttt = "Thanh toán tại nhà";
+else $pttt = "Thanh toán tại cửa hàng";
+
+if ($_POST['htvc'] == 0) $htvc = "Giao hàng tiết kiệm";
+else if ($_POST['note'] == 1) $htvc = "Giao hàng hỏa tốc";
+else  $htvc = "Giao hàng nhanh";
+
 $total = get_total_cart(); 
 
 $ngaylap = date("Y/m/d");
 
-$sql = "INSERT INTO tbl_order(total_price, date, transport_fee,status, user_id, email, phone_num, address, note)
-         VALUES ($total, '$ngaylap',0, 'Chờ xử lý', {$_SESSION['user_id']}, '$email', '$phone', '$address', '$note')";
+$sql = "INSERT INTO tbl_order(total_price, date, transport_fee,status, user_id, email, phone_num, address, note, httt, htvc)
+         VALUES ($total, '$ngaylap',0, 'Chờ xử lý', {$_SESSION['user_id']}, '$email', '$phone', '$address', '$note', '$pttt', '$htvc')";
 
          
 if(mysqli_query($con, $sql)){
@@ -41,6 +48,6 @@ if($success){
     $sql = "DELETE FROM tbl_cart WHERE user_id = {$_SESSION['user_id']}";
     
     if (mysqli_query($con, $sql)) {
-       redirect("?mod=cart", "order_detail&order_id=$MaDH");
+        redirect("?mod=cart", "order_detail&order_id=$MaDH");
     }
 }

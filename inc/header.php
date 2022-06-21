@@ -18,14 +18,14 @@ if (isset($_SESSION['user_id'])) {
         <link href="public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="public/style.css" rel="stylesheet" type="text/css"/>
         <link href="public/responsive.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+        <script src="public/js/main.js" type="text/javascript"></script>
         <script src="public/js/jquery-2.2.4.min.js" type="text/javascript"></script>
         <script src="public/js/elevatezoom-master/jquery.elevatezoom.js" type="text/javascript"></script>
         <script src="public/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
         <script src="public/js/carousel/owl.carousel.js" type="text/javascript"></script>
         <script src="public/js/main.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="../public/css/import/register.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
         <div id="site">
@@ -83,9 +83,6 @@ if (isset($_SESSION['user_id'])) {
                                                 <ul class="menuuser_sub">
                                                     <li class="menuuser_sub_item">
                                                         <a class="menuuser_sub_link" href="?mod=account&act=detail" title="">Thông tin user</a>
-                                                    </li>
-                                                    <li class="menuuser_sub_item">
-                                                        <a class="menuuser_sub_link" href="?mod=cart&act=list_product" title="">Đơn mua</a>
                                                     </li>
                                                     <li class="menuuser_sub_item">
                                                         <a class="menuuser_sub_link" href="admin" title="">Quản lý cửa hàng</a>

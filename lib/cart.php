@@ -46,4 +46,15 @@ function getMaDH(){
     }
     return false;
 }
+
+
+function getPrice($item){
+    return $item['promotional_price']>0 ? $item['promotional_price']: $item['original_price']; 
+}
+
+function update_num_order($sl, $ma){
+    global $con;
+    $sql = "UPDATE tbl_cart SET quantity = $sl where pro_id = $ma AND user_id = {$_SESSION['user_id']}";
+    mysqli_query($con, $sql);
+}
 ?>

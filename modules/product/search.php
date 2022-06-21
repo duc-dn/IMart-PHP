@@ -41,7 +41,7 @@ if (isset($_POST['btn-search'])) {
                                         <span class="old"><?= currency_format($item['promotional_price'])?></span>
                                     </div>
                                     <div class="action clearfix">
-                                        <a href="?mod=cart&act=add&id=<?= $item['pro_id'] ?>" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
+                                        <a href="?mod=cart&act=add&pro_id=<?= $item['pro_id'] ?>" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
                                         <a href="?mod=cart&act=add&pro_id=<?= $item['pro_id']?>" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
                                     </div>
                                 </li>

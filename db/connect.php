@@ -1,5 +1,5 @@
 <?php 
-$con = mysqli_connect('localhost', 'root', '', 'IMart');
+$con = mysqli_connect('localhost', 'root', '', 'imart');
 
 if (!$con) {
     echo "Kết nối không thành công ".mysqli_connect_error();

@@ -1,7 +1,7 @@
 <?php 
 
 if (!isset($_POST['btn_search'])) {
-    $list_order = get_detail_order();
+    $list_order = get_detail_ordered_customer();
 }
 else {
     $info = $_POST['info'];
@@ -10,13 +10,17 @@ else {
 
     $sql = "
     with tab as (
-        select order_id, sum(quantity) sl from tbl_orderdetail GROUP BY order_id
+        select tbl_user.user_id, sum(tbl_orderdetail.quantity) sl 
+        from tbl_orderdetail 
+             inner join tbl_order on tbl_orderdetail.order_id = tbl_order.order_id
+             inner join tbl_user on tbl_order.user_id = tbl_user.user_id
+        GROUP by tbl_user.user_id
     )
     select distinct * 
     from tbl_user inner join tbl_order on tbl_user.user_id = tbl_order.user_id
-        inner join tab on tab.order_id = tbl_order.order_id
+        inner join tab on tab.user_id = tbl_user.user_id
     where fullname like '%$info%' or tbl_user.phone_num like '%$info%'
-    or tbl_user.email like '%$info%' or tbl_user.address like '%$info%' or date like '%$info%'";
+    or tbl_user.email like '%$info%' or tbl_user.address like '%$info%'";
 
 
     $result = mysqli_query($con, $sql);
@@ -69,7 +73,6 @@ else {
                                     <td><span class="thead-text">Email</span></td>
                                     <td><span class="thead-text">Địa chỉ</span></td>
                                     <td><span class="thead-text">Đơn hàng</span></td>
-                                    <td><span class="thead-text">Thời gian</span></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -86,7 +89,6 @@ else {
                                     <td><span class="tbody-text"><?= $item['email'] ?></span></td>
                                     <td><span class="tbody-text"><?= $item['address'] ?></span></td>
                                     <td><span class="tbody-text"><?= $item['sl'] ?></span></td>
-                                    <td><span class="tbody-text"><?= $item['date'] ?></span></td>
                                 </tr>
                                 </td>
                                 </tr>

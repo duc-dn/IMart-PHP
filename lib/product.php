@@ -10,6 +10,7 @@ function get_list_product_by_catid($cat_id) {
     }
     return $list_product;
 }
+
 function get_list_product() { 
     global $con;
     $sql = "select * from tbl_product";

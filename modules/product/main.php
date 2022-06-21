@@ -32,18 +32,12 @@ else {
                         <div class="form-filter">
                             <form method="POST" action="">
                                 <select name="select">
-                                <?php
-                                    if($value == $vl[0])echo "<option value='{$vl[0]}' selected>Sắp xếp</option>";
-                                    else echo "<option value='{$vl[0]}'>Sắp xếp</option>";
-                                    if($value == $vl[1])echo "<option value='{$vl[1]}' selected>Từ A-Z</option>";
-                                    else echo "<option value='{$vl[1]}'>Từ A-Z</option>";
-                                    if($value == $vl[2])echo "<option value='{$vl[2]}' selected>Từ Z-A</option>";
-                                    else echo "<option value='{$vl[2]}'>Từ Z-A</option>";
-                                    if($value == $vl[3])echo "<option value='{$vl[3]}' selected>Giá cao xuống thấp</option>";
-                                    else echo "<option value='{$vl[3]}'>Giá cao xuống thấp</option>";
-                                    if($value == $vl[4])echo "<option value='{$vl[4]}' selected>Giá thấp lên cao</option>";
-                                    else echo "<option value='{$vl[4]}'>Giá thấp lên cao</option>";
-                                ?>
+                            
+                                <option value='<?=$vl[1]?>' selected>Từ A-Z</option>;
+                                <option value='<?=$vl[2]?>' selected>Từ Z-A</option>;
+                                <option value='<?=$vl[3]?>' selected>Giá cao xuống thấp</option>;
+                                <option value='<?=$vl[4]?>' selected>Giá thấp lên cao</option>;
+                                
                                 </select>
                                 <button type="submit" name="btn-filter">Lọc</button>
                             </form>
@@ -79,10 +73,10 @@ else {
                                     $value = $_POST['select']; 
                                     if (count($list_product) > 0) { foreach ($list_product as $item) {?>
                                     <li>
-                                        <a href="?mod=product&act=detail&id=<?= $item['pro_id']?>&cat_id=<?= $cat_id?>" title="" class="thumb" style="width:100%" height="350px">
+                                        <a href="?mod=product&act=detail&id=<?= $item['pro_id']?>&cat_id=<?= $item['cat_id'] ?>" title="" class="thumb" style="width:100%" height="350px">
                                             <img src="<?= $item['pro_image'] ?>" style="object-fit: contain;width: 100%;height: 174px"> 
                                         </a>
-                                        <a href="?mod=product&act=detail" title="" class="product-name"><?= $item['pro_name'] ?></a>
+                                        <a href="?mod=product&act=detail&id=<?= $item['pro_id']?>&cat_id=<?= $item['cat_id'] ?>" title="" class="product-name"><?= $item['pro_name'] ?></a>
                                         <div class="price">
                                             <span class="new"><?= currency_format($item['original_price']) ?></span>
                                             <span class="old"><?= currency_format($item['promotional_price'])?></span>
