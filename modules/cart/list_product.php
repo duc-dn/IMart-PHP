@@ -2,8 +2,10 @@
 <?php
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT pro_image,pro_name,promotional_price, tbl_order.status, sum(tbl_orderdetail.quantity) quantity
-        FROM tbl_order,tbl_orderdetail,tbl_product WHERE tbl_order.order_id=tbl_orderdetail.order_id AND 
+        FROM tbl_order,tbl_orderdetail,tbl_product 
+        WHERE tbl_order.order_id=tbl_orderdetail.order_id AND 
         tbl_orderdetail.pro_id=tbl_product.pro_id AND tbl_order.user_id='$user_id'
+        and tbl_order.status like '%thành công%'
         group by pro_image,pro_name,promotional_price, tbl_order.status";
 
 
@@ -47,7 +49,7 @@ $rs = mysqli_query($con, $sql);
                                     <td class="thead-text">Đơn giá</td>
                                     <td class="thead-text">Số lượng</td>
                                     <td class="thead-text">Thành tiền</td>
-                                    <td class="thead-text">Trạng thái</td>
+                                    
                                 </tr>
                                 <?php
                                 $sum_price = 0;
@@ -70,9 +72,6 @@ $rs = mysqli_query($con, $sql);
                                         <td class="thead-text"><?= currency_format($r['promotional_price']) ?></td>
                                         <td class="thead-text"><?= $r['quantity'] ?></td>
                                         <td class="thead-text"><?= currency_format($sum) ?></td>
-                                        <td class="thead-text">
-                                            <p style="display: inline-block;padding: 2px 5px; background-color: #27ae60; color: #fff"><?= $r['status'] ?></p>
-                                        </td>
                                     </tr>
                                 <?php
                                     $sum_price += $sum;
@@ -80,7 +79,7 @@ $rs = mysqli_query($con, $sql);
                                 }
                                 ?>
                                 <tr>
-                                    <td colspan="5">Tổng đơn hàng:</td>
+                                    <td colspan="4">Tổng đơn hàng:</td>
                                     <td><?= $sum_quantity ?></td>
                                     <td><?= currency_format($sum_price); ?></td>
                                 </tr>

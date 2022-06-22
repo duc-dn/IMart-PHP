@@ -12,6 +12,7 @@ if ($_POST['htvc'] == 0) $htvc = "Giao hàng tiết kiệm";
 else if ($_POST['note'] == 1) $htvc = "Giao hàng hỏa tốc";
 else  $htvc = "Giao hàng nhanh";
 
+
 $total = get_total_cart(); 
 
 $ngaylap = date("Y/m/d");
@@ -26,6 +27,7 @@ if(mysqli_query($con, $sql)){
 }
 
 $list_product = get_list_product_in_cart($_SESSION['user_id']);
+
 
 function addOrderDetail($MaDH, $MaSP, $sl){
     global $con;
@@ -47,6 +49,7 @@ if($success){
 
     $sql = "DELETE FROM tbl_cart WHERE user_id = {$_SESSION['user_id']}";
     
+    echo "<script>alert('Chúc mừng bạn đã đặt hàng thành công!!')</script>";
     if (mysqli_query($con, $sql)) {
         redirect("?mod=cart", "order_detail&order_id=$MaDH");
     }

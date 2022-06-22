@@ -20,8 +20,10 @@ $sql1 = "SELECT tbl_user.*
 $rs = mysqli_query($con, $sql);
 $list_ordered = array();
 
+
 while ($r = mysqli_fetch_assoc($rs)) {
     array_push($list_ordered, $r);
+    $item =$r;
 }
 
 $rs1 = mysqli_query($con, $sql1);
@@ -91,45 +93,48 @@ $status;
                                 <td class="thead-text">Ghi chú</td>
                                 <td class="thead-text">Tổng tiền</td>
                             </tr>
-                            <?php
-                            if (count($list_ordered) > 0) { foreach($list_ordered as $item) { $status = $item['status'];
-                            ?>
-                                <tr>
-                                    <td class="thead-text" style="width: 5%"><?= $item['order_id'] ?></td>
-                                    <td class="thead-text" style="text-align: left; padding-left: 20px; width: 35%;">
-                                        <div class="content" style="display:flex; align-items:center; justify-content: space-between;">
-                                            <div class="left" style="width: 25%;">
-                                                <div class="thumb">
-                                                    <img src="<?= $item['pro_image'] ?>" alt="" width="50px" height="50px" style="text-align:center; object-fit: contain; width: 80%;">
-                                                </div>
 
+                            <tr>
+                                <td class="thead-text" style="width: 5%"><?= $item['order_id'] ?></td>
+                                <td class="thead-text" style="text-align: left; padding-left: 20px; width: 35%;">
+                                    <?php
+                                    if (count($list_ordered) > 0) {
+                                        foreach ($list_ordered as $item) {
+                                            $status = $item['status'];
+                                    ?>
+                                            <div class="content" style="display:flex; align-items:center; justify-content: space-between;">
+                                                <div class="left" style="width: 25%;">
+                                                    <div class="thumb">
+                                                        <img src="<?= $item['pro_image'] ?>" alt="" width="50px" height="50px" style="text-align:center; object-fit: contain; width: 80%;">
+                                                    </div>
+
+                                                </div>
+                                                <div class="right" style="width: 85%;margin-left: 10px">
+                                                    <span> <?= $item['pro_name'] ?></span><br>
+                                                    <span>Số lượng: <strong><?= $item['quantity'] ?></strong></span><br>
+                                                    <span>Thành tiền: <?= currency_format($item['quantity'] * $item['promotional_price']) ?></span>
+                                                </div>
                                             </div>
-                                            <div class="right" style="width: 85%;margin-left: 10px">
-                                                <span> <?= $item['pro_name'] ?></span><br>
-                                                <span>Số lượng: <strong><?= $item['quantity'] ?></strong></span><br>
-                                                <span>Thành tiền: <?= currency_format($item['quantity'] * $item['promotional_price']) ?></span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="thead-text" style="width: 8%"><?= $item['date'] ?></td>
-                                    <td class="thead-text" style="width: 15%;">
-                                        <p style="display:inline-block; padding: 3px 5px; background-color: #27ae60; color: #fff"><?= $item['status'] ?></p>
-                                    </td>
-                                    <td class="thead-text" style="width: 12%"><p><?= $item['htvc'] ?></p><p><?= $item['httt'] ?></p></td>
-                                    <td class="thead-text" style="width: 12%"><?= $item['note'] ?></td>
-                                    <td class="thead-text" style="width: 13%"><?= currency_format($item['total_price']) ?></td>
-                                </tr>
-                            <?php
-                                }
-                            }
-                            ?>
-                            
-                            <?php if (isset($status) && $status == "Chờ xử lý") {?>
-                                <tr>
-                                    <td colspan="6"></td>
-                                    <td><a style="background-color: #e74c3c; padding:5px 10px; color:#fff;" href="?mod=cart&act=update&order_id=<?= $order_id?>" onclick="return confirm('Bạn có muốn hủy đơn hàng không?')">Hủy đơn hàng</a></td>
-                                </tr>
-                            <?php } ?>
+                                    <?php }}?>
+                                </td>
+                                <td class="thead-text" style="width: 8%"><?= $item['date'] ?></td>
+                                <td class="thead-text" style="width: 15%;">
+                                    <p style="display:inline-block; padding: 3px 5px; background-color: #27ae60; color: #fff"><?= $item['status'] ?></p>
+                                </td>
+                                <td class="thead-text" style="width: 12%">
+                                    <p><?= $item['htvc'] ?></p>
+                                    <p><?= $item['httt'] ?></p>
+                                </td>
+                                <td class="thead-text" style="width: 12%"><?= $item['note'] ?></td>
+                                <td class="thead-text" style="width: 13%"><?= currency_format($item['total_price']) ?></td>
+                            </tr>
+
+                    <?php if (isset($status) && $status == "Chờ xử lý") { ?>
+                        <tr>
+                            <td colspan="6"></td>
+                            <td><a style="background-color: #e74c3c; padding:5px 10px; color:#fff;" href="?mod=cart&act=update&order_id=<?= $order_id ?>" onclick="return confirm('Bạn có muốn hủy đơn hàng không?')">Hủy đơn hàng</a></td>
+                        </tr>
+                    <?php } ?>
                         </table>
                     </div>
                     <div class="place-order-wp clearfix">

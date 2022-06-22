@@ -75,6 +75,7 @@ $order_id = getMaDH();
                                     <td class="product-name">
                                         <span style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis; width: 400px"><?php echo $item['pro_name'] ?></span>
                                         <strong class="product-quantity">x <?php echo $item['quantity'] ?></strong>
+                                        
                                     </td>
                                     <td class="product-total"><?php echo currency_format($item['promotional_price'] > 0 ? $item['promotional_price'] : $item['original_price']); ?></td>
                                 </tr>
