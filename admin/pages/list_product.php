@@ -2,12 +2,13 @@
 
     if (!isset($_POST['btn_search'])) {
         global $con;
-        $sql="SELECT * FROM tbl_product";
+        $sql="SELECT *
+            FROM tbl_product";
         $rs=mysqli_query($con,$sql);
         $list=array();
         while($r=mysqli_fetch_array($rs))
         {
-            $list[]=$r;
+            array_push($list, $r);
         }
     }
     else {
@@ -47,7 +48,7 @@
                             <li class="pending"><a href="">Chờ xét duyệt<span class="count">(0)</span> |</a></li>
                             <li class="pending"><a href="">Thùng rác<span class="count">(0)</span></a></li>
                         </ul>
-                        <form method="POST" class="form-s fl-right">
+                        <form method="POST" class="form-s fl-right" action="">
                             <input type="text" name="info" id="s">
                             <input type="submit" name="btn_search" value="Tìm kiếm">
                         </form>
@@ -73,6 +74,7 @@
                                     <th>Tên sản phẩm</th>
                                     <th>Giá cũ</th>
                                     <th>Giá mới</th>
+                                    <th>Trạng thái</th>
                                     <th>Người tạo</th>
                                     <th>Tùy chọn</th>
                                 </tr>
@@ -92,10 +94,11 @@
                                         </td>
                                         <td><?=$r['original_price']?></td>
                                         <td><?=$r['promotional_price']?></td>
+                                        <td><p style="padding: 2px 5px; display:inline-block; background-color: #2ecc71;color:#fff"><?=$r['status_pro'] == 1 ? 'Ngừng kinh doanh': 'Đang bán'?></p></td>
                                         <td>Admin</td>
                                         <td class="clearfix">
-                                                <a href="?page=form_edit_pro&id=<?=$r['pro_id']?>" title="Sửa" class="edit" style=margin:10px><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                                <a href="?page=delete_pro&id=<?=$r['pro_id']?>" title="Xóa" class="delete" style=margin:10px><i class="fa fa-trash" aria-hidden="true" onclick=" return confirm ('Bạn chắc chắn muốn xóa tiếp không?')"></i></a>
+                                            <a href="?page=form_edit_pro&id=<?=$r['pro_id']?>" title="Sửa" class="edit" style=margin:10px><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            <a href="?page=update_product&id=<?=$r['pro_id']?>" title="Xóa" class="delete" style=margin:10px><i class="fa fa-trash" aria-hidden="true" onclick=" return confirm ('Bạn chắc chắn muốn xóa tiếp không?')"></i></a>
                                         </td>
                                     </tr>
                                 <?php

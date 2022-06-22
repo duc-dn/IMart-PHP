@@ -2,7 +2,7 @@
 // lấy danh sách sản phẩm theo ma danh mục 
 function get_list_product_by_catid($cat_id) { 
     global $con;
-    $sql = "select * from tbl_product where cat_id = {$cat_id}";
+    $sql = "select * from tbl_product where cat_id = {$cat_id} and status_pro=0";
     $result = mysqli_query($con, $sql); 
     $list_product = array();
     while ($row = mysqli_fetch_array($result)) {
@@ -13,7 +13,7 @@ function get_list_product_by_catid($cat_id) {
 
 function get_list_product() { 
     global $con;
-    $sql = "select * from tbl_product";
+    $sql = "select * from tbl_product where status_pro=0";
     $result = mysqli_query($con, $sql); 
     $list_product = array();
     while ($row = mysqli_fetch_array($result)) {
@@ -24,7 +24,7 @@ function get_list_product() {
 // Lấy tên danh mục theo mã danh mục
 function get_category_by_catid($cat_id) { 
     global $con;
-    $sql = "select cat_name from tbl_category where cat_id = {$cat_id}";
+    $sql = "select cat_name from tbl_category where cat_id = {$cat_id} and status_pro=0";
     $result = mysqli_query($con, $sql);  
 
     while ($row = mysqli_fetch_array($result)) {
@@ -35,7 +35,7 @@ function get_category_by_catid($cat_id) {
 // lấy thông tin một sản phẩm theo id 
 function get_product_info_by_proid($pro_id) {
     global $con;
-    $sql = "select * from tbl_product where pro_id = {$pro_id}";
+    $sql = "select * from tbl_product where pro_id = {$pro_id} and status_pro=0";
     $result = mysqli_query($con, $sql);  
 
     if (mysqli_num_rows($result)) {
@@ -52,7 +52,7 @@ function get_list_outstanding_product()
     $sql = "with tab as (
         SELECT pro_id, sum(quantity) sl FROM `tbl_orderdetail` group by pro_id
         )
-        select tbl_product.*, tab.sl from tbl_product inner join tab on tbl_product.pro_id = tab.pro_id ORDER by sl DESC ";
+        select tbl_product.*, tab.sl from tbl_product inner join tab on tbl_product.pro_id = tab.pro_id where  status_pro=0 ORDER by sl DESC ";
     $result = mysqli_query($con, $sql);
     $list_otd_p = array();
     if (mysqli_num_rows($result)) {

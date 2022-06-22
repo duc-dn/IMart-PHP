@@ -16,7 +16,8 @@
                                     <th><input type="checkbox" name="checkAll" id="checkAll"></th>
                                     <th><span class="thead-text">STT</span></th>
                                     <th><span class="thead-text">Tiêu đề</span></th>
-                                    <th><span class="thead-text">Thứ tự</span></th>
+                                    <th><span class="thead-text">Mã danh mục</span></th>
+                                    <th><span class="thead-text">Trạng thái</span></th>
                                     <th><span class="thead-text">Người tạo</span></th>
                                     <th><span class="thead-text">Tùy chọn</span></th>
                                 </tr>
@@ -33,10 +34,11 @@
                                         <td><?=$count?></td>
                                         <td><?=$r['cat_name']?></td>
                                         <td><?=$r['cat_id']?></td>
+                                        <td><p style="padding: 2px 5px; display:inline-block; background-color: #2ecc71;color:#fff"><?=$r['status_cat']==0?'Đang bán':'Ngừng kinh doanh'?></p></td>
                                         <td>Admin</td>
                                         <td>
                                         <a href="?page=form_edit_cat&id=<?=$r['cat_id']?>" title="Sửa" class="edit" style=margin:10px><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                                <a href="?page=delete_cat&id=<?=$r['cat_id']?>" title="Xóa" class="delete" style=margin:10px><i class="fa fa-trash" aria-hidden="true"  onclick='return confirm("Bạn chắc chắn muốn tiếp tục xóa không?")'></i></a>
+                                                <a href="?page=update_cat&id=<?=$r['cat_id']?>" title="Xóa" class="delete" style=margin:10px><i class="fa fa-trash" aria-hidden="true"  onclick='return confirm("Bạn chắc chắn muốn tiếp tục xóa không?")'></i></a>
                                         </td>
                                     </tr>
                                 <?php
